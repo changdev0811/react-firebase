@@ -7,5 +7,4 @@ export default combineReducers({
   auth: authReducer,
   firestore: firestoreReducer,
   firebase: firebaseReducer
-
 });
