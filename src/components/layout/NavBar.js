@@ -9,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -24,6 +26,19 @@ const styles = {
 
 function NavBar(props) {
   const { classes } = props;
+  const { auth } = props;
+  const links = auth.uid ? (
+      <div>
+        <Button color="inherit" component={Link} to="/dashboard">Dashboard</Button>
+        <Button color="inherit" component={Link} to="/service">Service</Button>
+        <Button color="inherit" component={Link} to="/logout">LogOut</Button>
+      </div>
+    ): (
+      <div>
+        <Button color="inherit" component={Link} to="/login">SignIn</Button>
+        <Button color="inherit" component={Link} to="/signup">SignUp</Button>
+      </div>
+    )
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -33,8 +48,9 @@ function NavBar(props) {
           </IconButton> */}
           <Typography variant="h6" color="inherit" className={classes.grow}>
           </Typography>
-          <Button color="inherit" component={Link} to="/login">SignIn</Button>
-          <Button color="inherit" component={Link} to="/signup">SignUp</Button>
+          {
+            links
+          }
         </Toolbar>
       </AppBar>
     </div>
@@ -45,4 +61,11 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NavBar);
+const mapStateToProps = (state) => {
+  // console.log(state);
+  return {
+    auth: state.firebase.auth
+  }
+}
+
+export default withStyles(styles)(connect(mapStateToProps)(NavBar));

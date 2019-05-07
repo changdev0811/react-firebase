@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,10 +9,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signIn } from '../../actions/authAction';
-import { red } from '@material-ui/core/colors';
 
 const styles = theme => ({
   main: {
@@ -71,6 +69,9 @@ class SignIn extends Component {
   render() {
     const { classes } = this.props;
     const { authError } =  this.props;
+    const { auth } = this.props;
+    if (auth.uid) return <Redirect to='/dashboard' />
+
     return (
       <main className={classes.main}>
         <CssBaseline />
@@ -111,12 +112,13 @@ class SignIn extends Component {
 
 const mapStateToProps = (state) => {
     return{
-      authError: state.auth.authError
+      authError: state.auth.authError,
+      auth: state.firebase.auth
     }
   }
   
 const mapDispatchToProps = (dispatch) => {
-  return{
+  return {
       signIn: (creds) => dispatch(signIn(creds))
   }
 }
