@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
-// import studentReducer from './studentReducer';
-// import genderReducer from './genderReducer';
+import {firestoreReducer} from 'redux-firestore';
+import {firebaseReducer} from 'react-redux-firebase';
 
 export default combineReducers({
   auth: authReducer,
-//   student:studentReducer,
-//   gender:genderReducer,
+  firestore: firestoreReducer,
+  firebase: firebaseReducer
+
 });

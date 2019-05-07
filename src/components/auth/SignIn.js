@@ -61,17 +61,8 @@ class SignIn extends Component {
     // }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/students');
-    }
-  }
-
-  onChange = event => {
-    const state = this.state;
-
-    state[event.target.name] = event.target.value;
-    this.setState(state);
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   onLogin = event => {
@@ -95,11 +86,11 @@ class SignIn extends Component {
           <form className={classes.form} onSubmit={this.onLogin}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email</InputLabel>
-              <Input name="email" type="email" autoComplete="email" onChange={this.onChange} autoFocus />
+              <Input name="email" type="email" autoComplete="email" onChange={this.handleChange} autoFocus />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
-              <Input name="password" type="password" onChange={this.onChange} autoComplete="current-password" />
+              <Input name="password" type="password" onChange={this.handleChange} autoComplete="current-password" />
             </FormControl>
             <Button
               type="submit"
@@ -118,10 +109,10 @@ class SignIn extends Component {
 
 }
 
-SignIn.propTypes = {
-  classes: PropTypes.object.isRequired,
-//   login: PropTypes.func.isRequired,
-};
+// SignIn.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// //   login: PropTypes.func.isRequired,
+// };
 
 const mapStateToProps = (state) => {
     return{
@@ -130,12 +121,10 @@ const mapStateToProps = (state) => {
   }
   
 const mapDispatchToProps = (dispatch) => {
-return{
-    signIn: (creds) => dispatch(signIn(creds))
+  return{
+      signIn: (creds) => dispatch(signIn(creds))
+  }
 }
-}
-
-
 
 // export default withStyles(styles)(SignIn);
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(SignIn));

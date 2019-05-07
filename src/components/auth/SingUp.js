@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import { connect } from 'react-redux';
-// import { login } from '../../actions/authAction';
+import { signUp } from '../../actions/authAction';
 
 
 
@@ -53,11 +53,12 @@ const styles = theme => ({
 class SignUp extends Component {
   constructor() {
     super();
+    
     this.state = {
       email: '',
       password: '',
-      first_name: '',
-      last_name: '',
+      firstName: '',
+      lastName: '',
       status: '',
       gender: ''
     };
@@ -75,8 +76,7 @@ class SignUp extends Component {
 
   onSignUp = event => {
     event.preventDefault();
-    // const { userId, password } = this.state;
-    // this.props.login(userId, password)
+    this.props.signUp(this.state);
   }
   
   render() {
@@ -101,12 +101,12 @@ class SignUp extends Component {
               <Input name="password" type="password" onChange={this.handleChange} autoComplete="current-password" />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="first_name">First Name</InputLabel>
-              <Input name="first_name" type="text" onChange={this.handleChange} />
+              <InputLabel htmlFor="firstName">First Name</InputLabel>
+              <Input name="firstName" type="text" onChange={this.handleChange} />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="last_name">Last Name</InputLabel>
-              <Input name="last_name" type="text" onChange={this.handleChange} />
+              <InputLabel htmlFor="lastNname">Last Name</InputLabel>
+              <Input name="lastNname" type="text" onChange={this.handleChange} />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="age-simple">Status</InputLabel>
@@ -115,7 +115,6 @@ class SignUp extends Component {
                     onChange={this.handleChange}
                     inputProps={{
                     name: 'status',
-                    id: 'status',
                     }}
                 >
                     <MenuItem value="">
@@ -132,7 +131,6 @@ class SignUp extends Component {
                     onChange={this.handleChange}
                     inputProps={{
                     name: 'gender',
-                    id: 'gender',
                     }}
                 >
                     <MenuItem value="">
@@ -159,16 +157,16 @@ class SignUp extends Component {
 
 }
 
-SignUp.propTypes = {
-  classes: PropTypes.object.isRequired,
-//   login: PropTypes.func.isRequired,
-};
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth
+  }
+}
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  // auth: state.fetch.user,
-  // isAuthenticated: state.user.isAuthenticated
-});
+const mapDispatchToProps = (dispatch) => {
+  return {
+      signUp: (newUser) => dispatch(signUp(newUser))
+  }
+}
 
-// export default withStyles(styles)(SignIn);
-export default withStyles(styles)(connect(mapStateToProps, {  })(SignUp));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(SignUp));
