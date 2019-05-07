@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import { connect } from 'react-redux';
-// import { login } from '../../actions/authAction';
+import { signIn } from '../../actions/authAction';
 
 const styles = theme => ({
   main: {
@@ -123,11 +123,19 @@ SignIn.propTypes = {
 //   login: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  // auth: state.fetch.user,
-  // isAuthenticated: state.user.isAuthenticated
-});
+const mapStateToProps = (state) => {
+    return{
+      authError: state.auth.authError
+    }
+  }
+  
+const mapDispatchToProps = (dispatch) => {
+return{
+    signIn: (creds) => dispatch(signIn(creds))
+}
+}
+
+
 
 // export default withStyles(styles)(SignIn);
-export default withStyles(styles)(connect(mapStateToProps, {  })(SignIn));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(SignIn));
