@@ -28,11 +28,10 @@ function NavBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+          {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            {/* News */}
           </Typography>
           <Button color="inherit" component={Link} to="/login">SignIn</Button>
           <Button color="inherit" component={Link} to="/signup">SignUp</Button>

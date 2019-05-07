@@ -13,8 +13,11 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import { Redirect } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 import { signUp } from '../../actions/authAction';
+
 
 
 
@@ -64,12 +67,6 @@ class SignUp extends Component {
     };
   }
 
-  componentDidMount() {
-    // if (this.props.auth.isAuthenticated) {
-    //   this.props.history.push('/students');
-    // }
-  }
-
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -81,6 +78,9 @@ class SignUp extends Component {
   
   render() {
     const { classes } = this.props;
+    const { auth, authError } = this.props;
+    if (auth.uid) return <Redirect to='/' />
+
     return (
       <main className={classes.main}>
         <CssBaseline />
@@ -105,7 +105,7 @@ class SignUp extends Component {
               <Input name="firstName" type="text" onChange={this.handleChange} />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="lastNname">Last Name</InputLabel>
+              <InputLabel htmlFor="lastName">Last Name</InputLabel>
               <Input name="lastNname" type="text" onChange={this.handleChange} />
             </FormControl>
             <FormControl margin="normal" required fullWidth>

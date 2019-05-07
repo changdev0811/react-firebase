@@ -13,6 +13,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import { connect } from 'react-redux';
 import { signIn } from '../../actions/authAction';
+import { red } from '@material-ui/core/colors';
 
 const styles = theme => ({
   main: {
@@ -44,6 +45,9 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  error: {
+    color: 'red'
+  }
 });
 
 class SignIn extends Component {
@@ -55,24 +59,18 @@ class SignIn extends Component {
     };
   }
 
-  componentDidMount() {
-    // if (this.props.auth.isAuthenticated) {
-    //   this.props.history.push('/students');
-    // }
-  }
-
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   onLogin = event => {
     event.preventDefault();
-    const { userId, password } = this.state;
-    this.props.login(userId, password)
+    this.props.signIn(this.state)
   }
   
   render() {
     const { classes } = this.props;
+    const { authError } =  this.props;
     return (
       <main className={classes.main}>
         <CssBaseline />
@@ -84,6 +82,9 @@ class SignIn extends Component {
             Sign In
           </Typography>
           <form className={classes.form} onSubmit={this.onLogin}>
+            <div className={classes.error}>
+              {authError ? <p>{authError}</p> : null}
+            </div>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email</InputLabel>
               <Input name="email" type="email" autoComplete="email" onChange={this.handleChange} autoFocus />
@@ -106,13 +107,7 @@ class SignIn extends Component {
       </main>
     );
   }
-
 }
-
-// SignIn.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// //   login: PropTypes.func.isRequired,
-// };
 
 const mapStateToProps = (state) => {
     return{
@@ -126,5 +121,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// export default withStyles(styles)(SignIn);
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(SignIn));
