@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import PrivateRoute from './components/common/PrivateRoute';
 
 import logo from './logo.svg';
 import './App.css';
@@ -34,9 +33,7 @@ class App extends Component {
               <Route exact path="/questionnariesresult" component={Questionnariesresult}></Route>
               <Route exact path="/service" component={Service_student}></Route>
               <Route exact path="/manage_service" component={Service_staff}></Route>
-              {/* <Switch>
-                <PrivateRoute exact path="/" component={Dashboard_student}></PrivateRoute>
-              </Switch> */}
+
             </div>
           </div>
         </Router>
