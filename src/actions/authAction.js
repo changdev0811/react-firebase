@@ -51,6 +51,9 @@ export const updateProfile = (currentUser) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
         const user = firebase.auth().currentUser;
+        console.log(currentUser.firstName);
+        console.log(currentUser.lastName);
+        console.log(currentUser.email)
         user.updateEmail(
             currentUser.email
         ).then(function(){

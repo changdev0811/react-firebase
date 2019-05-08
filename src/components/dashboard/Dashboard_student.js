@@ -59,7 +59,20 @@ class Dashboard_student extends Component {
 
     editProfile = event => {
         event.preventDefault();
-        this.props.updateProfile(this.state)
+        let firstName = '';
+        let lastName = '';
+        let email = this.state.email;
+        if (this.state.firstName === undefined){
+           firstName = this.props.profile.firstName;
+        }else{
+            firstName = this.state.firstName;
+        }
+        if (this.state.lastName === undefined){
+            lastName = this.props.profile.lastName;
+        }else{
+            lastName = this.state.lastName;
+        }
+        this.props.updateProfile({firstName, lastName, email})
     }
 
     render() {

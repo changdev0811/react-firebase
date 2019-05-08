@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -10,6 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
+import { signOut } from '../../actions/authAction';
 
 const styles = {
   root: {
@@ -24,37 +25,46 @@ const styles = {
   },
 };
 
-function NavBar(props) {
-  const { classes } = props;
-  const { auth } = props;
-  const links = auth.uid ? (
-      <div>
-        <Button color="inherit" component={Link} to="/dashboard">Dashboard</Button>
-        <Button color="inherit" component={Link} to="/service">Service</Button>
-        <Button color="inherit" component={Link} to="/logout">LogOut</Button>
+class NavBar extends Component {
+
+  onSignout = (event) => {
+    event.preventDefault();
+    this.props.signOut();
+  }
+
+  render() {
+    const { classes } = this.props;
+    const { auth } = this.props;
+    const links = auth.uid ? (
+        <div>
+          <Button color="inherit" component={Link} to="/dashboard">Dashboard</Button>
+          <Button color="inherit" component={Link} to="/service">Service</Button>
+          <Button color="inherit" onClick={this.onSignout}>LogOut</Button>
+        </div>
+      ): (
+        <div>
+          <Button color="inherit" component={Link} to="/login">SignIn</Button>
+          <Button color="inherit" component={Link} to="/signup">SignUp</Button>
+        </div>
+      )
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton> */}
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+            </Typography>
+            {
+              links
+            }
+          </Toolbar>
+        </AppBar>
       </div>
-    ): (
-      <div>
-        <Button color="inherit" component={Link} to="/login">SignIn</Button>
-        <Button color="inherit" component={Link} to="/signup">SignUp</Button>
-      </div>
-    )
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton> */}
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-          </Typography>
-          {
-            links
-          }
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+    );
+  }
+  
 }
 
 NavBar.propTypes = {
@@ -62,10 +72,15 @@ NavBar.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  // console.log(state);
   return {
     auth: state.firebase.auth
   }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(NavBar));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut())
+  }
+}
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(NavBar));
