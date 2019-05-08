@@ -11,6 +11,10 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getService, createService, deleteService, updateService } from '../../actions/serviceAction';
@@ -31,6 +35,10 @@ const styles = theme => ({
     card: {
       width: '100%',
       marginTop: theme.spacing.unit * 3,
+    },
+    fab: {
+        margin: theme.spacing.unit,
+        float: 'right'
     },
   });
 class Service_staff extends Component {
@@ -121,9 +129,9 @@ class Service_staff extends Component {
 
         return (
             <main className={classes.main}>
-                <Button variant="contained" color="primary" onClick={this.handleOpenCreateDialog}>
-                    Create
-                </Button>
+                <Fab color="primary" aria-label="Add" className={classes.fab} onClick={this.handleOpenCreateDialog}>
+                    <AddIcon />
+                </Fab>
                 {services.map((service, index) => {
                     const date = new Date(service.date.seconds * 1000);
                     const post_date = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear()
@@ -139,12 +147,12 @@ class Service_staff extends Component {
                                 </Typography>
                             </CardContent>
                             <CardActions className={classes.actions} disableActionSpacing>
-                                <Button color="primary" onClick={this.handleOpenEditDialog.bind(this, index)}>
-                                    Edit
-                                </Button>
-                                <Button color="primary" onClick={this.handleDelete.bind(this, service.id)}>
-                                    Delete
-                                </Button>
+                                <Fab color="secondary" size="small" className={classes.fab} onClick={this.handleOpenEditDialog.bind(this, index)}>
+                                    <EditIcon />
+                                </Fab>
+                                <Fab aria-label="Delete" size="small" className={classes.fab} onClick={this.handleDelete.bind(this, service.id)}>
+                                    <DeleteIcon />
+                                </Fab>
                             </CardActions>
                         </Card>
                     )}
