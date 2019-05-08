@@ -14,6 +14,7 @@ import Dashboard_student from './components/dashboard/Dashboard_student';
 import General from './components/questionnaires/General';
 import GeneralAdvice from './components/advice/GeneralAdvice';
 import Service_student from './components/service/Service_student';
+import Service_staff from './components/service/Service_staff';
 
 class App extends Component {
   render() {
@@ -30,6 +31,7 @@ class App extends Component {
               <Route exact path="/advice" component={GeneralAdvice}></Route>
               <Route exact path="/general" component={General}></Route>
               <Route exact path="/service" component={Service_student}></Route>
+              <Route exact path="/manage_service" component={Service_staff}></Route>
               {/* <Switch>
                 <PrivateRoute exact path="/" component={Dashboard_student}></PrivateRoute>
               </Switch> */}

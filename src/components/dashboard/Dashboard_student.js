@@ -39,6 +39,9 @@ const styles = theme => ({
         width: '48%',
         margin: theme.spacing.unit,
     },
+    button_1: {
+        marginTop: theme.spacing.unit * 2,
+    },
 })
 
 class Dashboard_student extends Component {
@@ -78,6 +81,7 @@ class Dashboard_student extends Component {
     render() {
         const { classes } = this.props;
         const { auth, profile } = this.props;
+        console.log(profile.status);
         if (!auth.uid) return <Redirect to='/login' />
         if (!profile.firstName){
             return (<main className={classes.main} />);
@@ -107,17 +111,35 @@ class Dashboard_student extends Component {
                         Edit
                     </Button>  
                 </form>
-                <div className={classes.buttons}>
-                    <Button variant="contained" color="primary" className={classes.button} component={Link} to="/general">
-                        General
-                    </Button>
-                    <Button variant="contained" color="primary" className={classes.button}>
-                        Mental Health
-                    </Button>
-                </div>
-                <Button variant="contained" color="secondary" component={Link} to="/advice" fullWidth>
-                    General Advice
-                </Button>
+                {(() => {
+                    if(profile.status === 'Student'){
+                        return(
+                        <div>
+                        <div className={classes.buttons}>
+                            <Button variant="contained" color="primary" className={classes.button} component={Link} to="/general">
+                                General
+                            </Button>
+                            <Button variant="contained" color="primary" className={classes.button}>
+                                Mental Health
+                            </Button>
+                        </div>
+                        <Button variant="contained" color="secondary" component={Link} to="/advice" fullWidth>
+                            General Advice
+                        </Button></div>
+                    )}else{
+                        return(
+                            <div>
+                               <Button variant="contained" color="secondary"  className={classes.button_1} component={Link} to="/manage_service" fullWidth>
+                                    Update Services
+                                </Button>
+                                <Button variant="contained" color="secondary"  className={classes.button_1} component={Link} to="/questionnariesresult" fullWidth>
+                                    Questionnaries Results
+                                </Button> 
+                            </div>
+                        )
+                    }
+                })()}
+                
             </main>
         );
     }
