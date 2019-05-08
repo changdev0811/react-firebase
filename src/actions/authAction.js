@@ -51,20 +51,13 @@ export const updateProfile = (currentUser) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
         const user = firebase.auth().currentUser;
-        // console.log(user);
-        console.log(currentUser.firstName);
-        console.log(currentUser.email);
         user.updateEmail(
             currentUser.email
         ).then(function(){
-            console.log(user.uid);
-        //     (resp) => {
-            // console.log(resp.user.uid);
-            // return firestore.collection('users').doc(user.uid).update({
-            //     firstName: currentUser.firstName,
-            //     lastName: currentUser.lastName
-            // })
-        // }
+            return firestore.collection('users').doc(user.uid).update({
+                firstName: currentUser.firstName,
+                lastName: currentUser.lastName
+            })
         }).then(() => {
             dispatch({ type: 'UPDATE_PROFILE_SUCCESS' })
         }).catch(err => {

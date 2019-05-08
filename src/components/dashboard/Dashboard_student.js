@@ -34,28 +34,20 @@ class Dashboard_student extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: props.profile.firstName,
-            lastName: '',
-            email: ''
+            firstName: this.props.profile.firstName,
+            lastName: this.props.profile.lastName,
+            email: this.props.auth.email
         };
         this.onChange = this.onChange.bind(this);
         this.editProfile = this.editProfile.bind(this);
     }
 
     onChange(event){
-        // console.log(event.target.value);
         this.setState({ [event.target.name]: event.target.value });
     }
 
     editProfile = event => {
         event.preventDefault();
-        const { auth, profile } = this.props;
-        console.log(this.state.firstName);
-        if (this.state.firstName == ''){
-            console.log("OK"+ profile.firstName);
-            this.setState({firstName: profile.firstName});
-        }
-        console.log(this.state.firstName);
         this.props.updateProfile(this.state)
     }
 
@@ -63,16 +55,15 @@ class Dashboard_student extends Component {
         const { classes } = this.props;
         const { auth, profile } = this.props;
         if (!auth.uid) return <Redirect to='/login' />
-       
         if (!profile.firstName){
-            return <main className={classes.main}></main>
+            return (<main className={classes.main} />);
         }
         return (
             <main className={classes.main}>
                 <form className={classes.form} onSubmit={this.editProfile}>
                     <FormControl margin="normal" required fullWidth>
                         <InputLabel htmlFor="firstName">First Name</InputLabel>
-                        <Input name="firstName" type="text" onChange={this.onChange} value={profile.firstName} autoFocus />
+                        <Input name="firstName" type="text" onChange={this.onChange} defaultValue={profile.firstName} autoFocus />
                     </FormControl>
                     <FormControl margin="normal" required fullWidth>
                         <InputLabel htmlFor="lastName">Last Name</InputLabel>
