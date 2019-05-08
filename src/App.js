@@ -13,6 +13,7 @@ import SignUp from './components/auth/SingUp';
 import Dashboard_student from './components/dashboard/Dashboard_student';
 import General from './components/questionnaires/General';
 import GeneralAdvice from './components/advice/GeneralAdvice';
+import Service_student from './components/service/Service_student';
 
 class App extends Component {
   render() {
@@ -26,10 +27,9 @@ class App extends Component {
               <Route exact path="/login" component={SignIn}></Route>
               <Route exact path="/signup" component={SignUp}></Route>
               <Route exact path="/dashboard" component={Dashboard_student}></Route>
-              <Route exact path="/service" component={SignUp}></Route>
               <Route exact path="/advice" component={GeneralAdvice}></Route>
               <Route exact path="/general" component={General}></Route>
-              
+              <Route exact path="/service" component={Service_student}></Route>
               {/* <Switch>
                 <PrivateRoute exact path="/" component={Dashboard_student}></PrivateRoute>
               </Switch> */}

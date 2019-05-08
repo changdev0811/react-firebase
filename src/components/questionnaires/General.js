@@ -40,15 +40,18 @@ const styles = theme => ({
 })
 
 const questionnaries = [
-    {content: 'Welcome to learning React!'},
-    {content: 'You can install React from npm.'},
+    {content: 'Welcome to learning React! okay?'},
+    {content: 'You can install React from npm. okay?'},
+    {content: 'How old are you?'},
+    {content: 'How old are you?'},
+    {content: 'How old are you?'},
     {content: 'How old are you?'}
   ];
 
 class General extends Component {
 
     state = {
-        scores: [1,1,1],
+        scores: [1,1,1,1,1,1],
     };
 
     handleChange = index => (event) => {
@@ -64,13 +67,13 @@ class General extends Component {
     }
     render() {
         const { classes } = this.props;
-
+        // console.log(questionnaries);
         return(
             <main className={classes.main}>
                 <List className={classes.root}>
-                    {questionnaries.map((question, index)=> 
+                    {questionnaries.map((question, index) => 
                         <ListItem key={index} alignItems="flex-start">
-                        {index+1}  : 
+                            {index+1}  : 
                             <ListItemText
                                 primary={question.content}
                             />
