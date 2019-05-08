@@ -11,6 +11,7 @@ import NavBar from './components/layout/NavBar';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SingUp';
 import Dashboard_student from './components/dashboard/Dashboard_student';
+import GeneralAdvice from './components/advice/GeneralAdvice';
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
               <Route exact path="/signup" component={SignUp}></Route>
               <Route exact path="/dashboard" component={Dashboard_student}></Route>
               <Route exact path="/service" component={SignUp}></Route>
+              <Route exact path="/advice" component={GeneralAdvice}></Route>
               
               {/* <Switch>
                 <PrivateRoute exact path="/" component={Dashboard_student}></PrivateRoute>

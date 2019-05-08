@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { updateProfile } from '../../actions/authAction';
@@ -22,11 +23,21 @@ const styles = theme => ({
         },
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '50%', // Fix IE 11 issue.
         marginTop: theme.spacing.unit,
     },
     submit: {
         marginTop: theme.spacing.unit * 3,
+        marginBottom: theme.spacing.unit * 3,
+    },
+    buttons: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing.unit,
+        marginBottom: theme.spacing.unit,
+    },
+    button: {
+        width: '48%',
+        margin: theme.spacing.unit,
     },
 })
 
@@ -83,6 +94,17 @@ class Dashboard_student extends Component {
                         Edit
                     </Button>  
                 </form>
+                <div className={classes.buttons}>
+                    <Button variant="contained" color="primary" className={classes.button}>
+                        General
+                    </Button>
+                    <Button variant="contained" color="primary" className={classes.button}>
+                        Mental Health
+                    </Button>
+                </div>
+                <Button variant="contained" color="secondary" component={Link} to="/advice" fullWidth>
+                    General Advice
+                </Button>
             </main>
         );
     }
