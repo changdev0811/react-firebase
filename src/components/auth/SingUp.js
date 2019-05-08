@@ -73,7 +73,9 @@ class SignUp extends Component {
 
   onSignUp = event => {
     event.preventDefault();
+    console.log(this.state);
     this.props.signUp(this.state);
+
   }
   
   render() {
@@ -106,7 +108,7 @@ class SignUp extends Component {
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="lastName">Last Name</InputLabel>
-              <Input name="lastNname" type="text" onChange={this.handleChange} />
+              <Input name="lastName" type="text" onChange={this.handleChange} />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="age-simple">Status</InputLabel>

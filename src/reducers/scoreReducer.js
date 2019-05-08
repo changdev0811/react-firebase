@@ -1,18 +1,18 @@
 const initState = {
-    authError: null
+    scores: [],
+    scoreError: null
 }
 
-const authReducer = (state = initState, action) => {
+const scoreReducer = (state = initState, action) => {
     switch(action.type){
-        case 'LOGIN_ERROR':
-            console.log('login error');
+        case 'GET_SCORES_SUCCESS':
+            console.log('get scores success');
             return {
-                ...state, 
-                authError: 'Login failed'
+                scores: action.payload
             }
         default:
             return state
     }
 };
 
-export default authReducer;
+export default scoreReducer;

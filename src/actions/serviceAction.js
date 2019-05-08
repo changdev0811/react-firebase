@@ -35,8 +35,15 @@ export const createService = (service) => {
             // console.log(docRef);
             firestore.collection("services").doc(docRef.id).get()
             .then((doc) => {
-                console.log(doc.data());
-                dispatch({ type: 'ADD_SERVICE_SUCCESS', payload: doc.data() })
+                // console.log(doc.data());
+                const service = {
+                    id: doc.id,
+                    title: doc.data().title,
+                    content: doc.data().content,
+                    date: doc.data().date
+                }
+                
+                dispatch({ type: 'ADD_SERVICE_SUCCESS', payload: service })
             })
             
         })
@@ -58,10 +65,22 @@ export const updateService = (service) => {
             date: firebase.firestore.FieldValue.serverTimestamp()
         })
         .then(function() {
-            console.log("Document successfully written!");
+            firestore.collection("services").get().then(function(querySnapshot) {
+                const services = [];
+                querySnapshot.forEach(function(doc) {
+                    const service = doc.data();
+                    services.push({
+                        id: doc.id,
+                        title: service.title,
+                        content: service.content,
+                        date: service.date
+                    });
+                });   
+                dispatch({ type: 'UPDATE_SERVICE_SUCCESS', payload: services })             
+            });
         })
         .catch(function(error) {
-            console.error("Error writing document: ", error);
+            dispatch({ type: 'UPDATE_SERVICE_ERROR', payload: error })
         });
     }
 }

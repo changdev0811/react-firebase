@@ -11,7 +11,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getService, createService, deleteService, updateService } from '../../actions/serviceAction';
 
@@ -62,6 +62,7 @@ class Service_staff extends Component {
         }
         this.handleClose();
         this.setState({
+            id: '', 
             title: '',
             content: ''
         })
@@ -70,7 +71,6 @@ class Service_staff extends Component {
 
     handleOpenEditDialog(id){
         this.setState({ e_open: true });
-        console.log(id+"OPEN");
         const { services } = this.props.services;
         const service = services[id];
         this.setState({
@@ -82,23 +82,30 @@ class Service_staff extends Component {
     };
 
     handleEdit = () => {
-        console.log("EDIT");
-        // console.log(this.state.id);
         const updated_service = {
             id: this.state.id,
             title: this.state.title,
             content: this.state.content
         }
-        console.log(updated_service);
+        this.setState({
+            id: '', 
+            title: '',
+            content: ''
+        })
+        this.handleClose();
         this.props.updateService(updated_service)
     }
 
     handleClose = () => {
+        this.setState({
+            id: '', 
+            title: '',
+            content: ''
+        })
         this.setState({ c_open: false, e_open: false });
     };
    
     handleDelete(id) {
-        console.log(id);
         this.props.deleteService(id);
     }
 
@@ -109,6 +116,9 @@ class Service_staff extends Component {
     render() {
         const { classes } = this.props;
         const { services } = this.props.services;
+        const { auth } = this.props;
+        if (!auth.uid) return <Redirect to='/login' />
+
         return (
             <main className={classes.main}>
                 <Button variant="contained" color="primary" onClick={this.handleOpenCreateDialog}>
@@ -224,9 +234,10 @@ class Service_staff extends Component {
 
 const mapStateToProps = (state) => {
     return{
-        services: state.service
+        services: state.service,
+        auth: state.firebase.auth
     }
-  }
+}
   
 const mapDispatchToProps = (dispatch) => {
   return {

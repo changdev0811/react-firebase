@@ -25,8 +25,13 @@ const serviceReducer = (state = initState, action) => {
         case 'UPDATE_SERVICE_SUCCESS':
             console.log('update service success');
             return {
+                services: action.payload
+            }
+        case 'UPDATE_SERVICE_ERROR':
+            console.log('update service error');
+            return {
                 ...state,
-                services: [action.payload, ...state.services]
+                serviceError: action.error
             }
         case 'DELETE_SERVICE_SUCCESS':
             console.log('delete service success');
