@@ -14,10 +14,8 @@ import General from './components/questionnaires/General';
 import GeneralAdvice from './components/advice/GeneralAdvice';
 import Service_student from './components/service/Service_student';
 import Service_staff from './components/service/Service_staff';
-<<<<<<< HEAD
-=======
+
 import Questionnariesresult from './components/questionnaires/Questionnariesresult';
->>>>>>> 01143ee95872f5ca80489027bcc5a78a5859dd31
 
 class App extends Component {
   render() {
