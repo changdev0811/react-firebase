@@ -60,7 +60,8 @@ class General extends Component {
 
     state = {
         scores: [1,1,1,1,1,1],
-        loading: false
+        loading: false,
+        average_score: null
     };
 
     handleChange = index => (event) => {
@@ -80,12 +81,14 @@ class General extends Component {
         });
         average_score = Math.round(total_score/6 * 100) / 100;
         this.props.insertScore(average_score);
-        this.setState({loading: true})
+        this.setState({loading: true, average_score: average_score})
     }
     render() {
         const { classes } = this.props;
-        const { auth, average_score } = this.props;
+        const { auth } = this.props;
+
         const loading = this.state.loading;
+        const average_score = this.state.average_score;
         if (!auth.uid) return <Redirect to='/login' />
         return(
             <main className={classes.main}>
