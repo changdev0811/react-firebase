@@ -11,6 +11,7 @@ import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SingUp';
 import Dashboard_student from './components/dashboard/Dashboard_student';
 import General from './components/questionnaires/General';
+import Mental from './components/questionnaires/Mental';
 import GeneralAdvice from './components/advice/GeneralAdvice';
 import Service_student from './components/service/Service_student';
 import Service_staff from './components/service/Service_staff';
@@ -31,6 +32,7 @@ class App extends Component {
               <Route exact path="/dashboard" component={Dashboard_student}></Route>
               <Route exact path="/advice" component={GeneralAdvice}></Route>
               <Route exact path="/general" component={General}></Route>
+              <Route exact path="/mental" component={Mental}></Route>
               <Route exact path="/questionnariesresult" component={Questionnariesresult}></Route>
               <Route exact path="/service" component={Service_student}></Route>
               <Route exact path="/manage_service" component={Service_staff}></Route>

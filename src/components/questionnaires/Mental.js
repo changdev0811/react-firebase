@@ -24,26 +24,26 @@ const styles = theme => ({
           marginRight: 'auto',
         },
     },
-    title: {
-        margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
-    },
     root: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
         backgroundColor: theme.palette.background.paper,
     },
+    title: {
+        margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
+    },
     formControl: {
         margin: theme.spacing.unit * 3,
     },
     group: {
-          display: 'block',
+        display: 'block',
         margin: `${theme.spacing.unit}px 0`,
     },
     submit: {
         marginTop: theme.spacing.unit * 3,
     },
     alert: {
-          color: 'red'
+        color: 'red'
     }
 })
 
@@ -56,7 +56,7 @@ const questionnaries = [
     {content: 'How old are you?'}
   ];
 
-class General extends Component {
+class Mental extends Component {
 
     state = {
         scores: [1,1,1,1,1,1],
@@ -90,7 +90,7 @@ class General extends Component {
         return(
             <main className={classes.main}>
                 <Typography variant="h6" className={classes.title}>
-                    General
+                    Mental Health
                 </Typography>
                 {!average_score && loading ? <p> Please Wait...</p>: null}
                 <div className={classes.alert}>
@@ -99,7 +99,7 @@ class General extends Component {
                 <List className={classes.root}>
                     {questionnaries.map((question, index) => 
                         <ListItem key={index} alignItems="flex-start">
-                            {index+1}.  
+                            {index+1}  : 
                             <ListItemText
                                 primary={question.content}
                             />
@@ -146,4 +146,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(General));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Mental));

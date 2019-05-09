@@ -159,7 +159,7 @@ class Dashboard_student extends Component {
                             <Button variant="contained" color="primary" className={classes.button} component={Link} to="/general">
                                 General
                             </Button>
-                            <Button variant="contained" color="primary" className={classes.button} component={Link} to="/general">
+                            <Button variant="contained" color="primary" className={classes.button} component={Link} to="/mental">
                                 Mental Health
                             </Button>
                         </div>
