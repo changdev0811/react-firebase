@@ -114,7 +114,7 @@ const mapStateToProps = (state) => {
       authError: state.auth.authError,
       auth: state.firebase.auth
     }
-  }
+}
   
 const mapDispatchToProps = (dispatch) => {
   return {
