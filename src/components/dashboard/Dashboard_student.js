@@ -26,6 +26,11 @@ const styles = theme => ({
         width: '50%', // Fix IE 11 issue.
         marginTop: theme.spacing.unit,
     },
+    edit: {
+        width: '50%', // Fix IE 11 issue.
+        marginTop: theme.spacing.unit * 3,
+        marginBottom: theme.spacing.unit * 3,
+    },
     submit: {
         marginTop: theme.spacing.unit * 3,
         marginBottom: theme.spacing.unit * 3,
@@ -126,18 +131,17 @@ class Dashboard_student extends Component {
                         return (
                             <div>
                                 <FormControl margin="normal" required fullWidth>
-                                    {profile.firstName} {profile.lastName}
+                                    Username: {profile.firstName} {profile.lastName}
                                 </FormControl>
-                                        
                                 <FormControl margin="normal" required fullWidth>
-                                    {auth.email}
+                                    Email: {auth.email}
                                 </FormControl>
                                 <Button
                                     type="button"
                                     fullWidth
                                     variant="contained"
                                     color="primary"
-                                    className={classes.submit}
+                                    className={classes.edit}
                                     onClick={this.handleEdit.bind(this)}
                                     >
                                     Edit Profile

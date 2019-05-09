@@ -18,9 +18,7 @@ import Service_staff from './components/service/Service_staff';
 import Questionnariesresult from './components/questionnaires/Questionnariesresult';
 
 class App extends Component {
-  render() {
-    // const service
-    
+  render() {    
     return (
       <Provider store={store}>
         <Router>
