@@ -1,11 +1,14 @@
-## Available Scripts
+# React-Redux Firebase App
 
-In the project directory, you can run:
-### `npm install`
-### `npm start`
+## Installation
+Run `npm install` to install all the required dependencies
+
+Then run `npm start` to start a dev server.
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+## Config
+```javascript
 const config = {
   apiKey: "AIzaSyDqrySIMY5aWSzLTNbuHkluPeIMIWmRLDU",
   authDomain: "react-firebase-9ec4a.firebaseapp.com",
@@ -14,6 +17,7 @@ const config = {
   storageBucket: "react-firebase-9ec4a.appspot.com",
   messagingSenderId: "1028587710969"
 };
+```
 
 This is my firebase config
 You could replace it to your firebase key.
