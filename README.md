@@ -19,7 +19,7 @@ const config = {
 };
 ```
 
-This is my firebase config
+This is my firebase config.
 You could replace it to your firebase key.
 In firebase database, you need to create users, scores, services collection.
 
