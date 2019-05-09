@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getService } from '../../actions/serviceAction';
 
@@ -33,6 +33,9 @@ class Service_student extends Component {
     render() {
         const { classes } = this.props;
         const { services } = this.props.services;
+        const { auth } = this.props;
+        if (!auth.uid) return <Redirect to='/login' />
+
         return (
             <main className={classes.main}>
                 {services.map((service, index) => {
@@ -59,9 +62,10 @@ class Service_student extends Component {
 
 const mapStateToProps = (state) => {
     return{
-        services: state.service
+        services: state.service,
+        auth: state.firebase.auth
     }
-  }
+}
   
 const mapDispatchToProps = (dispatch) => {
   return {

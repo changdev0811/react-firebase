@@ -7,8 +7,9 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { insertScore} from '../../actions/scoreAction';
 
 const styles = theme => ({
     main: {
@@ -63,11 +64,20 @@ class General extends Component {
 
     submitScore = event => {
         event.preventDefault();
-        console.log(this.state.scores);
+        const scores = this.state.scores;
+        var average_score = '';
+        var total_score = 0;
+        scores.map((value, key)=>{
+            total_score = total_score + value;
+        });
+        average_score = Math.round(total_score/6 * 100) / 100;
+        this.props.insertScore(average_score);
+        
     }
     render() {
         const { classes } = this.props;
-        // console.log(questionnaries);
+        const { auth } = this.props;
+        if (!auth.uid) return <Redirect to='/login' />
         return(
             <main className={classes.main}>
                 <List className={classes.root}>
@@ -107,4 +117,16 @@ class General extends Component {
     }
 }
 
-export default withStyles(styles)(connect()(General));
+const mapStateToProps = (state) => {
+    return{
+      auth: state.firebase.auth,
+    }
+  }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        insertScore: (average_score) => dispatch(insertScore(average_score)),
+    }
+}
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(General));

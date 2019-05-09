@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import PrivateRoute from './components/common/PrivateRoute';
 
 import logo from './logo.svg';
 import './App.css';
@@ -15,6 +14,10 @@ import General from './components/questionnaires/General';
 import GeneralAdvice from './components/advice/GeneralAdvice';
 import Service_student from './components/service/Service_student';
 import Service_staff from './components/service/Service_staff';
+<<<<<<< HEAD
+=======
+import Questionnariesresult from './components/questionnaires/Questionnariesresult';
+>>>>>>> 01143ee95872f5ca80489027bcc5a78a5859dd31
 
 class App extends Component {
   render() {
@@ -32,10 +35,10 @@ class App extends Component {
               <Route exact path="/dashboard" component={Dashboard_student}></Route>
               <Route exact path="/advice" component={GeneralAdvice}></Route>
               <Route exact path="/general" component={General}></Route>
+              <Route exact path="/questionnariesresult" component={Questionnariesresult}></Route>
               <Route exact path="/service" component={Service_student}></Route>
-              {/* <Switch>
-                <PrivateRoute exact path="/" component={Dashboard_student}></PrivateRoute>
-              </Switch> */}
+              <Route exact path="/manage_service" component={Service_staff}></Route>
+
             </div>
           </div>
         </Router>

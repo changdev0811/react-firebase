@@ -12,14 +12,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
 import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { signUp } from '../../actions/authAction';
-
-
-
 
 const styles = theme => ({
   main: {
@@ -51,6 +47,9 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  error: {
+    color: 'red'
+  }
 });
 
 class SignUp extends Component {
@@ -92,6 +91,9 @@ class SignUp extends Component {
             Sign Up
           </Typography>
           <form className={classes.form} onSubmit={this.onSignUp}>
+            <div className={classes.error}>
+              {authError ? <p>{authError}</p> : null}
+            </div>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email</InputLabel>
               <Input name="email" type="email" autoComplete="email" onChange={this.handleChange} autoFocus />
@@ -106,7 +108,7 @@ class SignUp extends Component {
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="lastName">Last Name</InputLabel>
-              <Input name="lastNname" type="text" onChange={this.handleChange} />
+              <Input name="lastName" type="text" onChange={this.handleChange} />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="age-simple">Status</InputLabel>
@@ -159,7 +161,8 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    authError: state.auth.authError,
   }
 }
 
