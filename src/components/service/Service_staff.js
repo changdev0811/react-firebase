@@ -86,7 +86,6 @@ class Service_staff extends Component {
             title: service.title,
             content: service.content
         });
-        
     };
 
     handleEdit = () => {
@@ -112,7 +111,7 @@ class Service_staff extends Component {
         })
         this.setState({ c_open: false, e_open: false });
     };
-   
+
     handleDelete(id) {
         this.props.deleteService(id);
     }
@@ -126,7 +125,6 @@ class Service_staff extends Component {
         const { services } = this.props.services;
         const { auth } = this.props;
         if (!auth.uid) return <Redirect to='/login' />
-
         return (
             <main className={classes.main}>
                 <Fab color="primary" aria-label="Add" className={classes.fab} onClick={this.handleOpenCreateDialog}>

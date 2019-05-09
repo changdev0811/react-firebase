@@ -71,7 +71,6 @@ class SignIn extends Component {
     const { authError } =  this.props;
     const { auth } = this.props;
     if (auth.uid) return <Redirect to='/dashboard' />
-
     return (
       <main className={classes.main}>
         <CssBaseline />

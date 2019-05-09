@@ -55,7 +55,7 @@ const styles = theme => ({
 class SignUp extends Component {
   constructor() {
     super();
-    
+
     this.state = {
       email: '',
       password: '',
@@ -74,7 +74,7 @@ class SignUp extends Component {
     event.preventDefault();
     this.props.signUp(this.state);
   }
-  
+
   render() {
     const { classes } = this.props;
     const { auth, authError } = this.props;
