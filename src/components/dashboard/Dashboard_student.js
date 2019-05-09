@@ -78,6 +78,7 @@ class Dashboard_student extends Component {
     render() {
         const { classes } = this.props;
         const { auth, profile } = this.props;
+        const status = profile.status;
         if (!auth.uid) return <Redirect to='/login' />
         if (!profile.firstName){
             return (<main className={classes.main} />);

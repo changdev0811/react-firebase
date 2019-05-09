@@ -14,9 +14,12 @@ import Dashboard_student from './components/dashboard/Dashboard_student';
 import General from './components/questionnaires/General';
 import GeneralAdvice from './components/advice/GeneralAdvice';
 import Service_student from './components/service/Service_student';
+import Service_staff from './components/service/Service_staff';
 
 class App extends Component {
   render() {
+    // const service
+    
     return (
       <Provider store={store}>
         <Router>
