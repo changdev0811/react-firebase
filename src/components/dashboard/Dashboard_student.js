@@ -48,6 +48,7 @@ class Dashboard_student extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            editEnable: false,
             firstName: this.props.profile.firstName,
             lastName: this.props.profile.lastName,
             email: this.props.auth.email
@@ -58,6 +59,10 @@ class Dashboard_student extends Component {
 
     onChange(event){
         this.setState({ [event.target.name]: event.target.value });
+    }
+
+    handleEdit(){
+        this.setState({editEnable: true});
     }
 
     editProfile = event => {
@@ -76,41 +81,72 @@ class Dashboard_student extends Component {
             lastName = this.state.lastName;
         }
         this.props.updateProfile({firstName, lastName, email})
+        this.setState({editEnable: false})
     }
 
     render() {
         const { classes } = this.props;
         const { auth, profile } = this.props;
-        const status = profile.status;
         if (!auth.uid) return <Redirect to='/login' />
         if (!profile.firstName){
             return (<main className={classes.main} />);
         }
         return (
             <main className={classes.main}>
-                <form className={classes.form} onSubmit={this.editProfile}>
-                    <FormControl margin="normal" required fullWidth>
-                        <InputLabel htmlFor="firstName">First Name</InputLabel>
-                        <Input name="firstName" type="text" onChange={this.onChange} defaultValue={profile.firstName} autoFocus />
-                    </FormControl>
-                    <FormControl margin="normal" required fullWidth>
-                        <InputLabel htmlFor="lastName">Last Name</InputLabel>
-                        <Input name="lastName" type="text" onChange={this.onChange} defaultValue={profile.lastName}/>
-                    </FormControl> 
-                    <FormControl margin="normal" required fullWidth>
-                        <InputLabel htmlFor="email">Email</InputLabel>
-                        <Input name="email" type="email" onChange={this.onChange} defaultValue={auth.email}/>
-                    </FormControl>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        >
-                        Edit
-                    </Button>  
-                </form>
+                {(() => {
+                    if(this.state.editEnable === true){
+                        return (
+                            <div>
+                                <form className={classes.form} onSubmit={this.editProfile}>
+                                    <FormControl margin="normal" required fullWidth>
+                                        <InputLabel htmlFor="firstName">First Name</InputLabel>
+                                        <Input name="firstName" type="text" onChange={this.onChange} defaultValue={profile.firstName} autoFocus />
+                                    </FormControl>
+                                    <FormControl margin="normal" required fullWidth>
+                                        <InputLabel htmlFor="lastName">Last Name</InputLabel>
+                                        <Input name="lastName" type="text" onChange={this.onChange} defaultValue={profile.lastName}/>
+                                    </FormControl> 
+                                    <FormControl margin="normal" required fullWidth>
+                                        <InputLabel htmlFor="email">Email</InputLabel>
+                                        <Input name="email" type="email" onChange={this.onChange} defaultValue={auth.email}/>
+                                    </FormControl>
+                                    <Button
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        color="primary"
+                                        className={classes.submit}
+                                        >
+                                        Save
+                                    </Button>  
+                                </form>
+                            </div>
+                        )
+                    }else{
+                        return (
+                            <div>
+                                <FormControl margin="normal" required fullWidth>
+                                    {profile.firstName} {profile.lastName}
+                                </FormControl>
+                                        
+                                <FormControl margin="normal" required fullWidth>
+                                    {auth.email}
+                                </FormControl>
+                                <Button
+                                    type="button"
+                                    fullWidth
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}
+                                    onClick={this.handleEdit.bind(this)}
+                                    >
+                                    Edit Profile
+                                </Button>  
+                            </div>
+                        )
+                    }
+                })()}
+                
                 {(() => {
                     if(profile.status === 'Student'){
                         return(

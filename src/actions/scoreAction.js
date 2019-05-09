@@ -3,7 +3,7 @@ export const insertScore = (average_score) => {
         const firebase = getFirebase();
         const firestore = getFirestore();
         const user = firebase.auth().currentUser;
-        
+
         const newScore = {
             email: user.email,
             average_score: average_score,
@@ -11,7 +11,7 @@ export const insertScore = (average_score) => {
         }
         firestore.collection("scores").add(newScore)
         .then((docRef) => {
-            dispatch({ type: 'ADD_SCORE_SUCCESS', payload: newScore })
+            dispatch({ type: 'ADD_SCORE_SUCCESS', payload: newScore.average_score })
         })
         .catch((error) => {
             dispatch({ type: 'ADD_SCORE_ERROR', payload: error })
@@ -21,10 +21,8 @@ export const insertScore = (average_score) => {
 
 export const getScores = () => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firebase = getFirebase();
         const firestore = getFirestore();
-        const user = firebase.auth().currentUser;
-        
+
         firestore.collection("scores").get().then(function(querySnapshot) {
             const scores = [];
             querySnapshot.forEach(function(doc) {

@@ -38,6 +38,9 @@ const styles = theme => ({
       submit: {
         marginTop: theme.spacing.unit * 3,
       },
+      alert: {
+          color: 'red'
+      }
 })
 
 const questionnaries = [
@@ -53,6 +56,7 @@ class General extends Component {
 
     state = {
         scores: [1,1,1,1,1,1],
+        loading: false
     };
 
     handleChange = index => (event) => {
@@ -72,14 +76,19 @@ class General extends Component {
         });
         average_score = Math.round(total_score/6 * 100) / 100;
         this.props.insertScore(average_score);
-        
+        this.setState({loading: true})
     }
     render() {
         const { classes } = this.props;
-        const { auth } = this.props;
+        const { auth, average_score } = this.props;
+        const loading = this.state.loading;
         if (!auth.uid) return <Redirect to='/login' />
         return(
             <main className={classes.main}>
+                {!average_score && loading ? <p> Please Wait...</p>: null}
+                <div className={classes.alert}>
+                   {average_score ? <p> Your Average Score: {average_score}</p> : null}
+                </div>
                 <List className={classes.root}>
                     {questionnaries.map((question, index) => 
                         <ListItem key={index} alignItems="flex-start">
@@ -120,6 +129,7 @@ class General extends Component {
 const mapStateToProps = (state) => {
     return{
       auth: state.firebase.auth,
+      average_score: state.score.average_score
     }
   }
 

@@ -1,5 +1,6 @@
 const initState = {
     scores: [],
+    average_score: '',
     scoreError: null
 }
 
@@ -9,6 +10,16 @@ const scoreReducer = (state = initState, action) => {
             console.log('get scores success');
             return {
                 scores: action.payload
+            }
+        case 'ADD_SCORE_SUCCESS':
+            console.log('add scores success');
+            return {
+                average_score: action.payload
+            }
+        case 'ADD_SCORE_ERROR':
+            console.log('add scores error');
+            return {
+                scoreError: action.error
             }
         default:
             return state
