@@ -23,7 +23,7 @@ This is my firebase config.
 You could replace it to your firebase key.
 In firebase database, you need to create users, scores, services collection.
 
-My name is Yilong in freelancer
+I am Yilong in freelancer
 
 
 
