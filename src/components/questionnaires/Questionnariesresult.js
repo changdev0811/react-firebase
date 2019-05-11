@@ -43,6 +43,9 @@ class Questionnariesresult extends Component {
         const { scores } = this.props;
         const { auth } = this.props;
         if (!auth.uid) return <Redirect to='/login' />
+        if (!scores){
+            return (<main className={classes.main} />);
+        }
         return(
             <main className={classes.main}>
                 <Grid item xs={12} md={12}>

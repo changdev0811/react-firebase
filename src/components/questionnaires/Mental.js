@@ -76,8 +76,9 @@ class Mental extends Component {
         const scores = this.state.scores;
         var average_score = '';
         var total_score = 0;
-        scores.map((value, key)=>{
+        scores.map((value, key) =>{
             total_score = total_score + value;
+            return false;
         });
         average_score = Math.round(total_score/6 * 100) / 100;
         this.props.insertScore(average_score);
