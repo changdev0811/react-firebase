@@ -27,15 +27,16 @@ const styles = theme => ({
 });
 class Service_student extends Component {
 
-    componentDidMount (){
+    componentWillMount (){
         this.props.getService();
     }
+
     render() {
         const { classes } = this.props;
         const { services } = this.props.services;
         const { auth } = this.props;
         if (!auth.uid) return <Redirect to='/login' />
-
+        console.log(services);
         return (
             <main className={classes.main}>
                 {services.map((service, index) => {

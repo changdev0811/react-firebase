@@ -87,7 +87,7 @@ class General extends Component {
     render() {
         const { classes } = this.props;
         const { auth } = this.props;
-
+        console.log(this.props);
         const loading = this.state.loading;
         const average_score = this.state.average_score;
         if (!auth.uid) return <Redirect to='/login' />
