@@ -23,7 +23,12 @@ This is my firebase config.
 You could replace it to your firebase key.
 In firebase database, you need to create users, scores, services collection.
 
-I am Yilong in freelancer
+```
+I am Yilong in freelancer.com
+email : anywhere0811@gmail.com
+skype : anywhere0811@outlook.com
+
+If you have some question, contact me.
 
 
 
